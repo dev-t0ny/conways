@@ -8,6 +8,13 @@
 void update(int generation, bool grid[HEIGHT][WIDTH]);
 void render(int generation, bool grid[HEIGHT][WIDTH]);
 
+struct Position
+{
+    int x;
+    int y;
+};
+
+
 int main()
 {
     int generation = 0;
@@ -40,12 +47,45 @@ void clearScreen()
     fflush(stdout);
 }
 
+int countNeighbours(Position p, bool grid[HEIGHT][WIDTH])
+{
+    int count = 0;
+    
+    for (int i = -1; i < 1; i++)
+    {
+        for (int j = -1; j < 1; j++)
+        {
+            Position currentCheck = {p.x + j, p.y + i };
+            bool isInBounds = false;
+
+            if (currentCheck.y < HEIGHT && currentCheck.x < WIDTH && currentCheck.x > 0 && currentCheck.y > 0)
+            {
+                isInBounds = true;
+            }
+
+            if (grid[currentCheck.y][currentCheck.x])
+            {
+                count++;
+            }
+        }
+    }
+
+    return count;
+}
+
+
 void update(int generation, bool grid[HEIGHT][WIDTH])
 {
-    
-    printf("%d",generation);
-    printf("\n");
+    for (int i = 0; i < HEIGHT; i++)
+    {
+        for (int j = 0; j < WIDTH; j++)
+        {
+           if (grid[i][j])
+           {
 
+           }
+        }
+    }
 }
 
 void render(int generation, bool grid[HEIGHT][WIDTH])
