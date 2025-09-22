@@ -34,9 +34,15 @@ int main()
     return 0;
 }
 
+void clearScreen()
+{
+    printf("\033[2J\033[H");
+    fflush(stdout);
+}
 
 void update(int generation, bool grid[HEIGHT][WIDTH])
 {
+    
     printf("%d",generation);
     printf("\n");
 
@@ -44,5 +50,23 @@ void update(int generation, bool grid[HEIGHT][WIDTH])
 
 void render(int generation, bool grid[HEIGHT][WIDTH])
 {
+    clearScreen();
 
+    for (int i = 0; i < HEIGHT;i++)
+    {
+        printf("\n");
+        for (int j = 0; j < WIDTH;j++)
+        {
+            bool currentSelection = grid[i][j];
+
+            if (currentSelection)
+            {
+                printf("%s", "■");
+            }
+            else
+            {
+               printf("%s","□");    
+            }
+        }
+    }
 }
