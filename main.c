@@ -5,7 +5,7 @@
 #define HEIGHT 20
 #define WIDTH 50
 
-void update(int generation, bool grid[HEIGHT][WIDTH]);
+void update(bool grid[HEIGHT][WIDTH]);
 void render(int generation, bool grid[HEIGHT][WIDTH]);
 
 struct Position
@@ -23,7 +23,7 @@ int main()
     for (int i = 0; i < HEIGHT; i++)
     {
         for(int j = 0; j < WIDTH; j++)
-        {
+        { 
             grid[i][j] = false;
         }
     }
@@ -32,7 +32,7 @@ int main()
     {
         generation++;
 
-        update(generation, grid);
+        update(grid);
         render(generation, grid);
         usleep(100000); 
 
@@ -47,7 +47,9 @@ void clearScreen()
     fflush(stdout);
 }
 
-int countNeighbours(Position p, bool grid[HEIGHT][WIDTH])
+
+
+int countNeighbours(struct Position p, bool grid[HEIGHT][WIDTH])
 {
     int count = 0;
     
@@ -55,7 +57,7 @@ int countNeighbours(Position p, bool grid[HEIGHT][WIDTH])
     {
         for (int j = -1; j < 1; j++)
         {
-            Position currentCheck = {p.x + j, p.y + i };
+            struct Position currentCheck = {p.x + j, p.y + i };
             bool isInBounds = false;
 
             if (currentCheck.y < HEIGHT && currentCheck.x < WIDTH && currentCheck.x > 0 && currentCheck.y > 0)
@@ -74,16 +76,39 @@ int countNeighbours(Position p, bool grid[HEIGHT][WIDTH])
 }
 
 
-void update(int generation, bool grid[HEIGHT][WIDTH])
+void update(bool grid[HEIGHT][WIDTH])
 {
     for (int i = 0; i < HEIGHT; i++)
     {
         for (int j = 0; j < WIDTH; j++)
         {
-           if (grid[i][j])
-           {
-
-           }
+            struct Position currentPos = {i,j};
+            int neighbourCount = countNeighbours(currentPos, grid);
+           
+            //dead 
+            if (grid[currentPos.y][currentPos.x])
+            {
+                if (neighbourCount == 3)
+                {
+                    grid[currentPos.y][currentPos.x] = true;     
+                }
+                
+            }
+           
+            //alive
+             else
+            {   
+                if (neighbourCount == 2 || neighbourCount == 3)
+                {
+                            
+                }
+                else
+                {   
+                    grid[currentPos.y][currentPos.x] = false;
+                }
+            }
+            
+             
         }
     }
 }
