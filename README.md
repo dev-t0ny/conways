@@ -19,7 +19,20 @@
   - Toute cellule vivante avec **moins de deux voisins vivants** meurt (sous-population).  
   - Toute cellule vivante avec **deux ou trois voisins vivants** survit.  
   - Toute cellule vivante avec **plus de trois voisins vivants** meurt (surpopulation).  
-  - Toute cellule morte avec **exactement trois voisins vivants** devient vivante (reproduction).  
+  - Toute cellule morte avec **exactement trois voisins vivants** devient vivante (reproduction).
+ 
+- hardcode des cellules de base (temporaire)
+```c
+void fill(bool grid[HEIGHT][WIDTH])
+{
+        grid[1][2] = true; 
+        grid[2][3] = true; 
+        grid[3][1] = true;
+        grid[3][2] = true;
+        grid[3][3] = true;
+...
+}
+```
 
 ---
 
