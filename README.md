@@ -1,5 +1,5 @@
 # Conway's Game of Life - C implementation
-> petit projet pour expérimenter avec le langage.
+> petit projet pour expérimenter avec le langage et la prog graphique.
 
 ---
 
